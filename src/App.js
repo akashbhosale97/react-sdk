@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Intro from "./components/Intro";
+import * as contentstack from "contentstack";
+import { useEffect, useState } from "react";
+
+const Stack = contentstack.Stack({
+  api_key: process.env.REACT_APP_CONTENTSTACK_API_KEY,
+  delivery_token: process.env.REACT_APP_CONTENTSTACK_DELIVERY_TOKEN,
+  environment: process.env.REACT_APP_CONTENTSTACK_ENVIRONMENT,
+});
 
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const Query = Stack.ContentType("portfolio").Query();
+    Query.includeCount()
+      .toJSON()
+      .find()
+      .then(
+        function success(result) {
+          setData(result[0][0]);
+        },
+        function error(err) {
+          console.log(err);
+        }
+      );
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Intro data={data} />
+    </>
   );
 }
 
