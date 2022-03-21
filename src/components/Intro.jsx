@@ -2,7 +2,6 @@ import React from "react";
 import "./intro.css";
 
 const Intro = ({ data }) => {
-  console.log(data);
   return data.length !== 0 ? (
     <div className="intro">
       <div className="intro__left">
