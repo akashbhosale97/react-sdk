@@ -2,6 +2,7 @@ import React from "react";
 import "./intro.css";
 
 const Intro = ({ data }) => {
+  console.log(data);
   return data.length !== 0 ? (
     <div className="intro">
       <div className="intro__left">
@@ -20,11 +21,7 @@ const Intro = ({ data }) => {
       </div>
       <div className="intro__right">
         <div className="intro__bg"></div>
-        <img
-          src={process.env.REACT_APP_IMAGE}
-          alt="me"
-          className="intro__img"
-        />
+        <img src={data.right.img.url} alt="me" className="intro__img" />
       </div>
     </div>
   ) : (
