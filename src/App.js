@@ -5,9 +5,13 @@ import { getEntry } from "./helpers/getData";
 function App() {
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
+  const newData = async () => {
     let newData = await getEntry();
     setData(newData);
+  };
+
+  useEffect(() => {
+    newData();
   }, []);
 
   return (
